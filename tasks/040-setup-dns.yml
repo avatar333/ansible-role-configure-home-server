@@ -1,0 +1,13 @@
+---
+
+- name: Install unbound
+  yum:
+    name: unbound
+    state: latest
+
+- name: Copy .conf file template
+  template:
+    src: a-records.conf.j2
+    dest: /tmp
+
+

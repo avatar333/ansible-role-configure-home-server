@@ -1,0 +1,31 @@
+---
+
+- name: Remove temporary directory
+  file:
+    path: /tmp/git
+    state: absent
+
+- name: Checkout some git repos for scripts
+  git:
+    repo: "{{ item.url }}"
+    dest: "{{ item.checkout_dir }}"
+    force: yes
+  loop:
+    - "{{ git_items }}"
+
+- name: Copy scripts to /usr/local/bin
+  copy:
+    src: "{{ item.checkout_dir }}/{{ item.script_name }}"
+    dest: /usr/local/bin
+    mode: 0755
+    remote_src: yes
+    force: yes
+    backup: true
+  loop:
+    - "{{ git_items }}"
+
+- name: Copy root crontab
+  copy:
+    src: files/root
+    dest: /var/spool/cron
+    mode: 0600

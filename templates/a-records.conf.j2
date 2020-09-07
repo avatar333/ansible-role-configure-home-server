@@ -1,0 +1,7 @@
+{% for host in myhosts %}
+# A Record
+  "local-data: {{ host }}.thedarkarts.za.net. A {{ ansible_facts['default_ipv4']['address'] }}"
+# PTR Record
+  "local-data-ptr: {{ ansible_facts['default_ipv4']['address'] }} {{ host }}.thedarkarts.za.net."
+
+{% endfor %}

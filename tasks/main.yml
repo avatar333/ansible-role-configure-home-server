@@ -1,2 +1,23 @@
 ---
-# tasks file for ansible-role-configure-home-server
+# tasks file for .
+
+- name: Gather variables for each operating system
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+        - "{{ ansible_distribution | lower }}.yml"
+      skip: true
+
+- import_tasks: 010-baseline-os.yml
+  tags: baseline-os
+
+- import_tasks: 020-configure-security.yml
+  tags: configure-security
+
+- import_tasks: 030-configure-scripts.yml
+  tags: configure-scripts
+    
+- import_tasks: 040-setup-dns.yml
+  tags: setup-dns
+  when: is_dns_server
