@@ -21,15 +21,11 @@ firewall_ports:
   - 8112/tcp # Deluge
   - 8989/tcp # Sonarr
   - 8080/tcp # Sabnzbd HTTP
-  - 9090/tcp # Sabnzbd HTTPS
-  - 8090/tcp # Mylar
-  - 8000/tcp # Munin
+  - 9090/tcp # Prometheus
   - 5800/tcp # JDownloader-2
-  - 4949/tcp # munin-node
   - 7878/tcp # Radarr
   - 514/udp  # DNS
   - 514/tcp  # DNS
-  - 8585/tcp
   - 9100/tcp # Prometheus Node Exporter
 
 firewall_services:
@@ -47,17 +43,50 @@ git_items:
     script_name: dnsactual.sh
   - url: 'https://github.com/avatar333/bash-set-media-permissions.git'
     checkout_dir: /tmp/git/bash-set-media-permissions
-    script_name: bash-set-media-permissions.sh
+    script_name: set-media-permissions.sh
+
+cron_entries:
+  - cron_name: "Update external DNS"
+    cron_minute: "*/5"
+    cron_hour: "*"
+    cron_job: /usr/local/bin/dnsactual.sh
+  - cron_name: "Set media permissions"
+    cron_minute: "*/5"
+    cron_hour: "*"
+    cron_job: /usr/local/bin/bash-set-media-permissions.sh
 
 myhosts:
-  - dlm4
-  - dlm5
-  - radarr
-  - sonarr
-  - deluge
-  - sabnzbd
-  - jdo
-  - wiki
-  - borgcube
-  - prometheus
-  - grafana 
+  - hostname: dlm4
+    ipaddr: "{{ ansible_facts['default_ipv4']['address'] }}"
+  - hostname: dlm5
+    ipaddr: "{{ ansible_facts['default_ipv4']['address'] }}"
+  - hostname: radarr
+    ipaddr: "{{ ansible_facts['default_ipv4']['address'] }}"
+  - hostname: sonarr
+    ipaddr: "{{ ansible_facts['default_ipv4']['address'] }}"
+  - hostname: deluge
+    ipaddr: "{{ ansible_facts['default_ipv4']['address'] }}"
+  - hostname: sabnzbd
+    ipaddr: "{{ ansible_facts['default_ipv4']['address'] }}"
+  - hostname: jdo
+    ipaddr: "{{ ansible_facts['default_ipv4']['address'] }}"
+  - hostname: wiki
+    ipaddr: "{{ ansible_facts['default_ipv4']['address'] }}"
+  - hostname: prometheus
+    ipaddr: "{{ ansible_facts['default_ipv4']['address'] }}"
+  - hostname: grafana
+    ipaddr: "{{ ansible_facts['default_ipv4']['address'] }}"
+
+# PARKED VARIABLES
+#myhosts:
+#  - dlm4
+#  - dlm5
+#  - radarr
+#  - sonarr
+#  - deluge
+#  - sabnzbd
+#  - jdo
+#  - wiki
+#  - borgcube
+#  - prometheus
+#  - grafana

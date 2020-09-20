@@ -10,8 +10,7 @@
     repo: "{{ item.url }}"
     dest: "{{ item.checkout_dir }}"
     force: yes
-  loop:
-    - "{{ git_items }}"
+  loop: "{{ git_items }}"
 
 - name: Copy scripts to /usr/local/bin
   copy:
@@ -21,11 +20,20 @@
     remote_src: yes
     force: yes
     backup: true
-  loop:
-    - "{{ git_items }}"
+  loop: "{{ git_items }}"
 
-- name: Copy root crontab
-  copy:
-    src: files/root
-    dest: /var/spool/cron
-    mode: 0600
+#- name: Copy root crontab
+#  copy:
+#    src: files/root
+#    dest: /var/spool/cron
+#    mode: 0600
+
+- name: Added cron entries
+  cron:
+    name: "{{ item.cron_name }}"
+    minute: "{{ item.cron_minute }}"
+    hour: "{{ item.cron_hour }}"
+    job: "{{ item.cron_job }}"
+  loop: "{{ cron_entries }}"
+  
+

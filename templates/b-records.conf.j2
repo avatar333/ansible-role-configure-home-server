@@ -1,0 +1,7 @@
+{% for host in mybhosts %}
+# A Record
+  "local-data: {{ host.hostname }}.thedarkarts.za.net. A {{ host.ipaddr }}"
+# PTR Record
+  "local-data-ptr: {{ host.ipaddr }} {{ host.hostname }}.thedarkarts.za.net."
+
+{% endfor %}

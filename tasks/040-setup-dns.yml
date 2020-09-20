@@ -8,6 +8,10 @@
 - name: Copy .conf file template
   template:
     src: a-records.conf.j2
-    dest: /tmp
+    dest: /etc/unbound/local.d/a-records.conf
 
+- name: Copy .conf file template
+  template:
+    src: b-records.conf.j2
+    dest: /tmp/b-records.conf
 

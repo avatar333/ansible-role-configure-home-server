@@ -33,3 +33,4 @@ packages:
     - net-tools
     - iperf3
     - iproute-tc
+    - lm_sensors
