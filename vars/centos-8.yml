@@ -34,3 +34,4 @@ packages:
     - iperf3
     - iproute-tc
     - lm_sensors
+    - tree

@@ -39,3 +39,5 @@ packages:
   - smartmontools
   - net-tools
   - iperf3
+  - lm_sensors
+  - tree
