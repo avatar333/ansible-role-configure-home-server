@@ -41,3 +41,4 @@ packages:
   - iperf3
   - lm_sensors
   - tree
+  - nfs-utils
