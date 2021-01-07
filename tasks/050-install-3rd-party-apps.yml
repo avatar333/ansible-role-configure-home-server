@@ -1,0 +1,13 @@
+---
+
+- name: Install role specific packages - nginx
+  yum:
+    name: nginx
+    state: latest
+  when: is_webserver
+
+- name: Install role specific packages - Plex
+  yum:
+    name: plexmediaserver
+    state: latest
+  when: install_plexmediaserver
