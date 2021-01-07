@@ -9,12 +9,13 @@ dnshosts:
 
 full_update_os: false
 
-install_plexmediaserver: false
+install_plexmediaserver: true
 
 is_laptop: false
 is_webserver: false
 is_docker_host: false
 is_dns_server: false
+is_k8s_server: false
 
 firewall_ports:
   - 32400/tcp # Plex
@@ -27,6 +28,11 @@ firewall_ports:
   - 514/udp  # DNS
   - 514/tcp  # DNS
   - 9100/tcp # Prometheus Node Exporter
+
+firewall_ports_k8s:
+  - 8080/tcp # K8s, for Helm connection
+  - 6443/tcp
+  - 10250/tcp
 
 firewall_services:
     - http

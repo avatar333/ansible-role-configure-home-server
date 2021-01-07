@@ -30,7 +30,6 @@ packages:
   - ntfsprogs.x86_64
   - ntfs-3g.x86_64
   - yum-axelget
-  - yum-fast-downloader
   - psmisc
   - lsof
   - vim

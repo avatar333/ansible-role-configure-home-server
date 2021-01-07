@@ -18,7 +18,7 @@
     state: directory
     mode: 0700
 
-- name: Open relevant firewalld ports
+- name: Open relevant firewalld ports if server is a docker host
   firewalld:
     port: "{{ item }}"
     permanent: true
@@ -32,4 +32,15 @@
     service: "{{ item }}"
     permanent: true
     state: enabled
+    immediate: true
   loop: "{{ firewall_services }}"
+
+- name: Open relevant firewall ports if server is a k8s host
+  firewalld:
+    port: "{{ item }}"
+    permanent: true
+    immediate: true
+    state: enabled
+  loop: "{{ firewall_ports_k8s }}"
+  when: is_k8s_server
+
