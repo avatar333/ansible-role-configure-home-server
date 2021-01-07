@@ -63,8 +63,10 @@ cron_entries:
 
 myhosts:
   - hostname: dlm4
-    ipaddr: "{{ ansible_facts['default_ipv4']['address'] }}"
+    ipaddr: "192.168.1.33"
   - hostname: dlm5
+    ipaddr: "192.168.1.35"
+  - hostname: dlm6
     ipaddr: "{{ ansible_facts['default_ipv4']['address'] }}"
   - hostname: radarr
     ipaddr: "{{ ansible_facts['default_ipv4']['address'] }}"

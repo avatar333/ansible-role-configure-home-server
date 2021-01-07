@@ -16,7 +16,6 @@ packages:
   - policycoreutils-python
   - bash-completion
   - mlocate
-  - munin-node
   - nginx
   - python2-certbot-nginx
   - ncompress
