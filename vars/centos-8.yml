@@ -1,4 +1,5 @@
 packages:
+    - pciutils
     - screen
     - rsync
     - wget
