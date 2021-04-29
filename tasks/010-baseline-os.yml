@@ -41,4 +41,8 @@
     regexp: "^#?HandleLidSwitch=ignore"
   when: is_laptop
 
+- name: Set hostname
+  ansible.builtin.hostname:
+    name: "{{ server_hostname }}"
+  when: server_hostname is defined
 
