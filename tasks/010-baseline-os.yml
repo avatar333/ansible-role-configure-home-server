@@ -6,6 +6,10 @@
     dest: /etc/resolv.conf
     backup: true
 
+- name: Ensure /etc/resolv.conf is not overwritten
+  shell:
+    cmd: "chattr +i /etc/resolv.conf"
+
 - import_tasks: 011-create-repos.yml
   tags: create-repos
 
@@ -16,18 +20,18 @@
   when: full_update_os
 
 # Install additional packages for general administration usage
-- name: Install general additional packages"
+- name: Install general additional packages
   yum:
     name: "{{ packages }}"
     state: latest
 
-- name: "Restart chrony"
+- name: Restart chrony
   systemd:
     name: chronyd
     state: restarted
     enabled: true
 
-- name: "set -o vi"
+- name: set -o vi
   lineinfile:
     path: /etc/profile
     insertafter: EOF
