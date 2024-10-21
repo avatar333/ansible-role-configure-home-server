@@ -14,7 +14,7 @@ install_plexmediaserver: true
 is_laptop: false
 is_webserver: false
 is_docker_host: false
-is_dns_server: false
+is_unbound_server: false
 is_k8s_server: false
 
 firewall_ports:
@@ -28,6 +28,11 @@ firewall_ports:
   - 514/udp  # DNS
   - 514/tcp  # DNS
   - 9100/tcp # Prometheus Node Exporter
+  - 3000/tcp # Grafana
+  - 8085/tcp # HTPCManager
+  - 2202/tcp # Ubooquity
+  - 2203/tcp # Ubooquity
+  - 8090/tcp # Mylar
 
 firewall_ports_k8s:
   - 8080/tcp # K8s, for Helm connection
@@ -62,11 +67,9 @@ cron_entries:
     cron_job: /usr/local/bin/bash-set-media-permissions.sh
 
 myhosts:
-  - hostname: dlm4
-    ipaddr: "192.168.1.33"
   - hostname: dlm5
     ipaddr: "192.168.1.35"
-  - hostname: dlm6
+  - hostname: gateroom
     ipaddr: "{{ ansible_facts['default_ipv4']['address'] }}"
   - hostname: radarr
     ipaddr: "{{ ansible_facts['default_ipv4']['address'] }}"

@@ -27,6 +27,11 @@
   loop: "{{ firewall_ports }}"
   when: is_docker_host
 
+#- name: Install python pip packages
+#  pip:
+#    name: docker
+#  when: is_docker_host
+
 - name: Open relevant firewalld services
   firewalld:
     service: "{{ item }}"

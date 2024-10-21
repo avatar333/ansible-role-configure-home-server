@@ -37,3 +37,5 @@ packages:
     - lm_sensors
     - tree
     - nfs-utils
+    - httpd-tools
+    - mediainfo

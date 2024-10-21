@@ -6,8 +6,21 @@
     state: latest
   when: is_webserver
 
+- name: Enable nginx daemon
+  systemd:
+    name: nginx
+    state: started
+    enabled: true
+
 - name: Install role specific packages - Plex
   yum:
     name: plexmediaserver
     state: latest
   when: install_plexmediaserver
+
+- name: Install docker packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ docker_packages }}"
+  when: is_docker_host
